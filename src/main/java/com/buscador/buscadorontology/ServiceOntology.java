@@ -189,7 +189,9 @@ public class ServiceOntology {
 	    		 //String link=ResultSetFormatter.asText(results);
 	    		  ResultSetFormatter.outputAsJSON(results);
 	    		 //System.out.println(link);
-	    		 queryExecution.close() ; */
+                 queryExecution.close() ;
+                 
+                 */
         return quesosDuros; 
     }
     public List<QuesoSemiSuave> getQuesosSemiSuaves(){
