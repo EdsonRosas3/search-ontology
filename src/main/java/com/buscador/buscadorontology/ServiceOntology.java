@@ -9,12 +9,13 @@ import com.buscador.buscadorontology.Clases.QuesoSemiSuave;
 import com.buscador.buscadorontology.Clases.QuesoSuave;
 import com.hp.hpl.jena.ontology.OntModel;
 
-import com.hp.hpl.jena.query.QueryException;
+import com.hp.hpl.jena.query.QueryExecution;
 
-
+import com.hp.hpl.jena.query.ResultSetFormatter;
 import com.hp.hpl.jena.query.QueryExecutionFactory;
-
+import com.hp.hpl.jena.query.QuerySolution;
 import com.hp.hpl.jena.query.ResultSet;
+
 
 public class ServiceOntology {
 
@@ -30,7 +31,30 @@ public class ServiceOntology {
         Ontologia ont = main.getOntology();
         model = ont.getModelo();
     }
+    public  String prueba(){
+        String query = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>"
+                + "PREFIX owl: <http://www.w3.org/2002/07/owl#>"
+                + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>"
+                + "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>" +
 
+                "SELECT ?x  ?descripcionQ ?nombre  ?procedencia ?paisQ ?envejecimiento"
+                + "WHERE { ?x rdf:type ?<queso:QuesoDuro> ." + "?x <queso:DescripcionQueso> ?descripcionQ ."
+                + "?x <queso:Nombre> ?nombre ." + "?x <queso:Envejecimiento> ?envejecimiento."
+                + "?x <queso:Procedencia> ?procedencia ." + "?x <queso:PaisQueso> ?paisQ" +
+
+                "}";
+        QueryExecution queryExecution = QueryExecutionFactory.create(query, model);
+        ResultSet results = queryExecution.execSelect();
+	    		 //String link=ResultSetFormatter.asText(results);
+	    		  //ResultSetFormatter.outputAsJSON(results);
+	    		 //System.out.println(link);
+                 queryExecution.close() ;
+                 
+                 List<QuerySolution> list = ResultSetFormatter.toList(results);
+                 String quesito= list.get(0).toString();
+                 System.out.println(quesito);
+        return quesito;
+    }
     public List<Queso> search(String input){
         String[] palabras = input.split(" ");
         boolean queso = esQueso(palabras);
@@ -56,7 +80,7 @@ public class ServiceOntology {
             }else{
                 addResultQuesosDuros(palabras,getQuesosDuros());
                 addResultQuesosSemiSuaves(palabras,getQuesosSemiSuaves());
-                addResultQuesosSuaves(palabras,getQuesosSuaves(););
+                addResultQuesosSuaves(palabras,getQuesosSuaves());
             }
         }
         return resultQuesos;
@@ -103,7 +127,7 @@ public class ServiceOntology {
             countryFV= existe(country,pls);
             sourceFV= existe(source,pls);
             pasteurisedFV= existe(pasteurised,pls);
-            textureFV = existe(texture, pls)
+            textureFV = existe(texture, pls);
             
             if(nameFV || descriptionFV || countryFV || sourceFV || pasteurisedFV || textureFV){
                 resultQuesos.add(queso);
@@ -173,7 +197,7 @@ public class ServiceOntology {
     }
 
     public List<QuesoDuro> getQuesosDuros() {
-       /*  String query = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>"
+        String query = "PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>"
                 + "PREFIX owl: <http://www.w3.org/2002/07/owl#>"
                 + "PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>"
                 + "PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>" +
@@ -184,14 +208,17 @@ public class ServiceOntology {
                 + "?x <queso:Procedencia> ?procedencia ." + "?x <queso:PaisQueso> ?paisQ" +
 
                 "}";
-        QueryException queryExecution = QueryExecutionFactory.create(query, model);
+        QueryExecution queryExecution = QueryExecutionFactory.create(query, model);
         ResultSet results = queryExecution.execSelect();
 	    		 //String link=ResultSetFormatter.asText(results);
-	    		  ResultSetFormatter.outputAsJSON(results);
+	    		  //ResultSetFormatter.outputAsJSON(results);
 	    		 //System.out.println(link);
                  queryExecution.close() ;
                  
-                 */
+                 List<QuerySolution> list = ResultSetFormatter.toList(results);
+                 String quesito= list.get(0).toString();
+                 System.out.println(quesito);
+
         return quesosDuros; 
     }
     public List<QuesoSemiSuave> getQuesosSemiSuaves(){

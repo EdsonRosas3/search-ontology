@@ -21,9 +21,10 @@ public class buscadorController {
     @PostMapping("/resultados")
     public ModelAndView resultados(@ModelAttribute("frase") Frase frase){
         ModelAndView mav = new ModelAndView("resultados");
-        mav.addObject("frase", frase);
         ServiceOntology service = new ServiceOntology();
-        service.search(frase.getFrase());
+        String queso = service.prueba();
+        mav.addObject("queso", queso);
+        
         return mav;
     }
 }

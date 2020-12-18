@@ -74,7 +74,6 @@ public class ConsultasDBpedia {
 			QueryExecution queryExecution = QueryExecutionFactory.sparqlService("http://dbpedia.org/sparql",queryAging); 
 			results = queryExecution.execSelect(); 
 			link=ResultSetFormatter.asText(results);
-			System.out.println(link);
 			queryExecution.close() ; 
 	}
 	 if(propiedad=="pais") {
@@ -102,7 +101,6 @@ public class ConsultasDBpedia {
 			QueryExecution queryExecution = QueryExecutionFactory.sparqlService("http://dbpedia.org/sparql",queryIngredient); 
 			results = queryExecution.execSelect(); 
 			link=ResultSetFormatter.asText(results);
-			System.out.println(link);
 			queryExecution.close() ; 
 		}
 		if(propiedad.equals("ingredient")) {
@@ -111,7 +109,6 @@ public class ConsultasDBpedia {
 			QueryExecution queryExecution = QueryExecutionFactory.sparqlService("http://dbpedia.org/sparql",queryIngredient); 
 			results = queryExecution.execSelect(); 
 			link=ResultSetFormatter.asText(results);
-			System.out.println(link);
 			queryExecution.close() ; 
 		}
 
