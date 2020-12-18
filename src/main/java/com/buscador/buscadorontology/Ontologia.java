@@ -104,14 +104,19 @@ public class Ontologia {
 	     //Relaciones
 	     ObjectProperty tieneComoIngrediente = modelo.createObjectProperty(NS+":"+"TieneComoIngrediente");
 	     tieneComoIngrediente.addDomain(Pasta);
-	     tieneComoIngrediente.addRange(queso);
-	     
+		 tieneComoIngrediente.addRange(queso);
+
+		 CrearIndividuoQuesoDuro();
+		 crearIndividuosQuesoSemiSuave();
+		 crearIndividuosQuesoSuave();
+		 crearIndividuosPasta();
+	     crearArchivoOwl();
 
 	 }
 	 
 	 private void crearArchivoOwl() {
 		//Almacenamos la ontología en un fichero OWL (Opcional)
-			File file = new File("C:\\OntologiaQueso.owl");
+			File file = new File("C:\\lDesarrollo-software\\Java\\buscador-ontology\\Ontoliga.owl");
 			//Hay que capturar las Excepciones
 			if (!file.exists()){
 			     try {
@@ -130,7 +135,7 @@ public class Ontologia {
 
 	 }
 	 
-	 private OntModel getModelo() {
+	 public OntModel getModelo() {
 		 return modelo;
 		 
 	 }

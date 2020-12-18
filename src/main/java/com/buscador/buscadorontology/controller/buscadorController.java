@@ -1,5 +1,6 @@
 package com.buscador.buscadorontology.controller;
 
+import com.buscador.buscadorontology.ServiceOntology;
 import com.buscador.buscadorontology.model.Frase;
 
 import org.springframework.stereotype.Controller;
@@ -21,6 +22,8 @@ public class buscadorController {
     public ModelAndView resultados(@ModelAttribute("frase") Frase frase){
         ModelAndView mav = new ModelAndView("resultados");
         mav.addObject("frase", frase);
+        ServiceOntology service = new ServiceOntology();
+        service.search(frase.getFrase());
         return mav;
     }
 }
